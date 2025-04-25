@@ -3,7 +3,7 @@ import java.net.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ChatServer {
-    private static final int PORT = 12346; // Port number for the server
+    private static  int port = 12346; // Port number for the server
     private static CopyOnWriteArrayList<ClientHandler> clients = new CopyOnWriteArrayList<>(); // List of clients
     private ServerSocket serverSocket;
 
@@ -32,44 +32,14 @@ public class ChatServer {
             }
         }
     }
+    public void UpdateConfig(int port, String newIPaddress)
+    {
+        this.port = port;
+        this.IP
 
-    // Inner class to handle each client
-    private static class ClientHandler implements Runnable {
-        private Socket socket;
-        private BufferedReader input;
-        private PrintWriter output;
+    }
 
-        public ClientHandler(Socket socket) {
-            this.socket = socket;
-            try {
-                input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                output = new PrintWriter(socket.getOutputStream(), true);
-            } catch (IOException e) {
-                System.out.println("Error setting up client: " + e.getMessage());
-            }
-        }
 
-        @Override
-        public void run() {
-            try {
-                String message;
-                while ((message = input.readLine()) != null) {
-                    System.out.println("Message: " + message);
-                    sendMessageToAll(message);
-                }
-            } catch (IOException e) {
-                System.out.println("Client disconnected: " + e.getMessage());
-            } finally {
-                try {
-                    socket.close();
-                } catch (IOException e) {
-                    System.out.println("Error closing socket: " + e.getMessage());
-                }
-                clients.remove(this);
-            }
-        }
-
-        // Send message to all clients
         private void sendMessageToAll(String message) {
             for (ClientHandler client : clients) {
                 client.output.println(message);
