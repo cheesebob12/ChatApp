@@ -1,0 +1,11 @@
+<VBox spacing="10" xmlns:fx="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="chat.ChatGUI">
+    <HBox spacing="10">
+        <TextField fx:id="usernameField" promptText="Username"/>
+        <TextField fx:id="messageField" promptText="Message"/>
+        <Button fx:id="sendButton" text="Send" onAction="#sendButtonPressed"/>
+    </HBox>
+    <HBox spacing="10">
+        <Button fx:id="disconnectButton" text="Disconnect" onAction="#disconnect"/>
+    </HBox>
+    <TextArea fx:id="chatArea" prefHeight="200" editable="false" wrapText="true"/>
+</VBox>

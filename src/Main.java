@@ -7,7 +7,10 @@ import javafx.scene.Parent;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("MainView.fxml"));
+        // Load ChatGUI.fxml instead of MainView.fxml
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ChatGUI.fxml"));
+        Parent root = loader.load();
+
         primaryStage.setTitle("Chat App");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
